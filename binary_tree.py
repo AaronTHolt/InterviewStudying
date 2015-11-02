@@ -1,9 +1,10 @@
 
 class node_1(object):
-    def __init__(self, data=None, left=None, right=None):
+    def __init__(self, data=None, parent=None, left=None, right=None):
         self.data = data
         self.left = left
         self.right = right
+        self.parent = None
 
 def print_tree_inorder(node):
     '''inorder traversal and printing of tree'''
@@ -31,15 +32,20 @@ def insert_node(node, data):
     #Data greater than pr equal to current node data
     elif data >= node.data:
         if node.right == None:
-            node.right = node_1(data=data)
+            node.right = node_1(parent=node, data=data)
         else:
             insert_node(node.right, data)
     #Data less than current node data
     elif data < node.data:
         if node.left == None:
-            node.left = node_1(data=data)
+            node.left = node_1(parent=node, data=data)
         else:
             insert_node(node.left, data)
+
+def delete_data(root, data):
+    '''Delete data if it exist'''
+
+
 
 
 r = node_1(data=17)
