@@ -4,11 +4,14 @@ class node_1(object):
         self.data = data
         self.left = left
         self.right = right
-        self.parent = None
+        self.parent = parent
 
-def print_tree_inorder(node):
+def print_tree_inorder_space(node):
     '''inorder traversal and printing of tree'''
+    print_tree_inorder(node)
+    print ''
     
+def print_tree_inorder(node):
     #node left?
     if node.left!=None:
         print_tree_inorder(node.left)
@@ -36,7 +39,7 @@ def insert_node(node, data):
         else:
             insert_node(node.right, data)
     #Data less than current node data
-    elif delete_data < node.data:
+    elif data < node.data:
         if node.left == None:
             node.left = node_1(parent=node, data=data)
         else:
@@ -60,72 +63,67 @@ def delete_data(root, data):
 
 
 
-# def delete_node(node):
-#     # temp_parent = node.Parent
-#     temp_node = None
+def delete_node(node):
+    # temp_parent = node.parent
+    temp_node = node
 
-#     #root node?
-#     if node.Parent == None:
-#         node.data = None
-#         return True
+    
 
-#     #no children
-#     if node.left == None and node.right == None:
-#         if node.Parent.left == node:
-#             node.Parent.left = None
-#         else:
-#             node.Parent.right = None
+    #no children
+    if node.left == None and node.right == None:
+        #root node?
+        if node.parent == None:
+            node.data = None
+            return True
 
-#     #has one child
-#     elif node.right != node.left:
-#         if node.right:
-#             temp_node = node.right
-#         else:
-#             temp_node = node.left
+        if node.parent.left == node:
+            node.parent.left = None
+        else:
+            node.parent.right = None
 
-#         if node.Parent:
-#             if node.parent.left == Node:
-#                 node.parent.left = temp_node
-#             else:
-#                 node.parent.right = temp_node
-#             del nod
-#         else:
-#             self.data = temp_node.data
-#             self.left = temp_node.data
-#             self.right = temp_node.right
+    #has one child
+    elif node.right != node.left:
+        if node.right:
+            temp_node = node.right
+        else:
+            temp_node = node.left
 
-#     #has 2 children
-#     else:
-#         parent = node
-#         successor = node.right
+        if node.parent:
+            if node.parent.left == Node:
+                node.parent.left = temp_node
+            else:
+                node.parent.right = temp_node
+            del nod
+        else:
+            node.data = temp_node.data
+            node.left = temp_node.data
+            node.right = temp_node.right
+
+    #has 2 children
+    else:
+        parent = node
+        successor = node.right
         
-#         while successor.left:
-#             parent = successor.left
-#             successor = successor.left
-#         node.data = successor.data
+        while successor.left:
+            parent = successor.left
+            successor = successor.left
+        node.data = successor.data
 
-#         if parent.left == successor:
-#             parent.left = succerssor.right
-#         else:
-#             parent.right = successor.right
-
-
-
-
-
-
-
-
+        if parent.left == successor:
+            parent.left = succerssor.right
+        else:
+            parent.right = successor.right
 
 
 r = node_1(data=17)
 for ii in range(0,30,4):
     insert_node(r, ii)
 
-print_tree_inorder(r)
+# print_tree_inorder(r)
 # print ''
-# insert_node(r, 11)
+insert_node(r, 11)
 # insert_node(r, 27)
-# print_tree_inorder(r)
-# delete_data(r, 11)
-# print_tree_inorder(r)
+print_tree_inorder_space(r)
+delete_data(r, 11)
+delete_data(r, 17)
+print_tree_inorder(r)
