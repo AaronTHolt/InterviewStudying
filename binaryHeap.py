@@ -87,7 +87,7 @@ class BinaryHeap(object):
 		'''Destroy the heap and leave a sorted array'''
 
 		while self.currentSize > 0:
-			self.printInorder()
+			# self.printInorder()
 			#First swap with last value
 			lastIndex = self.currentSize-1
 			self.heapList[0], self.heapList[lastIndex] = self.heapList[lastIndex], self.heapList[0]
